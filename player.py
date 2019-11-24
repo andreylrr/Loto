@@ -9,4 +9,3 @@ class Player():
     def check_number(self, number, card_number):
         pass
 
-    
