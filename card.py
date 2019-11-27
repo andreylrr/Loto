@@ -12,3 +12,6 @@ class Card():
 
     def card_out(self):
         pass
+
+    def set_card(self):
+        pass
