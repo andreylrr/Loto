@@ -1,5 +1,7 @@
 
-class Barell():
+
+class Barell ():
+
     def __init__(self, number, state):
         self.i_number = number
         self.s_state = state
