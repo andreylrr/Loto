@@ -4,7 +4,7 @@ class Player():
         self.l_card = cards
 
     def add_card(self, card):
-        pass
+        self.l_card.append(card)
 
     def check_number(self, number, card_number):
         pass

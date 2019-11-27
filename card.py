@@ -7,40 +7,47 @@ class Card():
     def __init__(self):
         self.clean()
 
-
     def clean(self):
         self.l_lines = []
-        d_1 = dict()
-        d_2 = dict()
-        d_3 = dict()
+        for i in range(3):
+            self.l_lines.append(self.clean_line())
 
-        for i in range(1, 15):
-            d_1[i] = b.Barell(0, "Empty")
-            d_2[i] = b.Barell(0, "Empty")
-            d_3[i] = b.Barell(0, "Empty")
-
-        self.l_lines.append(d_1)
-        self.l_lines.append(d_2)
-        self.l_lines.append(d_3)
-
+    def clean_line(self):
+        return {i: b.Barell(0,"Empty") for i in range(1,9)}
 
     def is_number_in(self, number):
         pass
 
     def card_out(self):
-        pass
+        l_out = []
+        for d_line in self.l_lines:
+            l_out.append(self.line_out(d_line))
+        return l_out
+
+    def line_out(self, card_dict):
+        s_out = ""
+        for barell in card_dict:
+            if barell.state == "Empty":
+                s_out += "   "
+            elif barell.state == "Ready":
+                s_out += str(barell.number)
+            elif barell.state == "Played":
+                s_out += "---"
+        return s_out
 
     def set_card(self):
-        for x in self.l_lines:
-            i_
-            while True:
-                i_r_position = random.randint(1, 9)
-                i_r_number = random.random(1, 99)
-                if x[i_r_position].value.state == "Empty":
-                    x[i_r_position].value.number = i_r_number
-                    x[i_r_position].value.state = "Ready"
+        map(self.set_line, self.l_lines)
 
-
-
-
-        pass
+    def set_line(self, card_dict):
+        l_number = random.sample(range(1,100), 5)
+        l_number.sort()
+        i_position = 0
+        while True:
+            i_r_position = random.randint(1,9)
+            if card_dict[i_r_position].state == "Empty":
+                card_dict[i_r_position].number = l_number[i_position]
+                card_dict[i_r_position].state = "Ready"
+                i_position += 1
+            if i_position > 5:
+                break
+        return card_dict
