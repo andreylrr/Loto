@@ -13,10 +13,15 @@ class Card():
             self.l_lines.append(self.clean_line())
 
     def clean_line(self):
-        return {i: b.Barell(0,"Empty") for i in range(1,9)}
+        return {i: b.Barell(0,"Empty") for i in range(1,10)}
 
     def is_number_in(self, number):
-        pass
+        for x in self.l_lines:
+            for barell in x.values():
+                if barell.number == number:
+                    barell.state = "Played"
+                    return True
+        return False
 
     def card_out(self):
         l_out = []
@@ -26,28 +31,34 @@ class Card():
 
     def line_out(self, card_dict):
         s_out = ""
-        for barell in card_dict:
+        for barell in card_dict.values():
             if barell.state == "Empty":
                 s_out += "   "
             elif barell.state == "Ready":
-                s_out += str(barell.number)
+                s_out += '{:3d}'.format(barell.number)
             elif barell.state == "Played":
                 s_out += "---"
         return s_out
 
     def set_card(self):
-        map(self.set_line, self.l_lines)
+        self.l_lines = list(map(self.set_line, self.l_lines))
 
     def set_line(self, card_dict):
         l_number = random.sample(range(1,100), 5)
         l_number.sort()
-        i_position = 0
-        while True:
-            i_r_position = random.randint(1,9)
-            if card_dict[i_r_position].state == "Empty":
-                card_dict[i_r_position].number = l_number[i_position]
-                card_dict[i_r_position].state = "Ready"
-                i_position += 1
-            if i_position > 5:
-                break
+        l_position = random.sample(range(1,10), 5)
+        l_position.sort()
+        if len(set(l_number)) == 5 and len(set(l_position)) == 5 :
+            for i,i_position in enumerate(l_position):
+                card_dict[i_position].number = l_number[i]
+                card_dict[i_position].state = "Ready"
         return card_dict
+
+
+if __name__ == "__main__":
+
+    c = Card()
+    c.set_card()
+    l = c.card_out()
+    for x in l:
+        print(x)
