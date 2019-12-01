@@ -17,4 +17,5 @@ class Player():
                 b_result = True
         return b_result
 
-
+    def get_cards_out(self):
+        return [x.card_out() for x in self.l_card]
