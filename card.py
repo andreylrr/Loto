@@ -16,12 +16,21 @@ class Card():
         return {i: b.Barell(0,"Empty") for i in range(1,10)}
 
     def is_number_in(self, number):
+        b_result = False
         for x in self.l_lines:
             for barell in x.values():
                 if barell.number == number:
                     barell.state = "Played"
-                    return True
-        return False
+                    b_result = True
+        return b_result
+
+    def is_all_played(self):
+        b_result = True
+        for x in self.l_lines:
+            for barell in x.values():
+                if barell.state == "Ready":
+                    b_result = False
+        return b_result
 
     def card_out(self):
         l_out = []
