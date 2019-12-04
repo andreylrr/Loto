@@ -42,11 +42,11 @@ class Card():
         s_out = ""
         for barell in card_dict.values():
             if barell.state == "Empty":
-                s_out += "   "
+                s_out += "    "
             elif barell.state == "Ready":
-                s_out += '{:3d}'.format(barell.number)
+                s_out += '{:3d}'.format(barell.number) + " "
             elif barell.state == "Played":
-                s_out += "---"
+                s_out += "---" + " "
         return s_out
 
     def set_card(self):
