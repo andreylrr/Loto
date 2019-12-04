@@ -4,7 +4,7 @@ print("Добро пожаловать в игру лотерея!!!!")
 print("\n")
 
 while True:
-    s_n_players = input("Введите число участников игры:")
+    s_n_players = input('Введите число участников игры с учетом игрока "компютер":')
     if s_n_players.isdigit():
         i_n_plaers = int(s_n_players)
         break
