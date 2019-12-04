@@ -64,10 +64,3 @@ class Card():
         return card_dict
 
 
-if __name__ == "__main__":
-
-    c = Card()
-    c.set_card()
-    l = c.card_out()
-    for x in l:
-        print(x)

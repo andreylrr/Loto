@@ -3,6 +3,23 @@ class Player():
     def __init__(self, name):
         self.l_card = []
         self.s_player_name = name
+        self.s_state = "Playing"
+
+    @property
+    def state(self):
+        return self.s_state
+
+    @state.setter
+    def state(self, value):
+        self.s_state = value
+
+    @property
+    def name(self):
+        return self.s_player_name
+
+    @name.setter
+    def name(self, value):
+        self.s_player_name = value
 
     def add_card(self, card):
         self.l_card.append(card)

@@ -20,6 +20,7 @@ class Game():
         self.i_play_number = play_number
         self.i_card_number = card_number
         self.l_players_names = names
+        self.l_players = []
 
         if self.i_play_number <= 0:
             raise ValueError("Количество игроков не может быть отрицательным числом.")
@@ -38,36 +39,36 @@ class Game():
         self.i_number_barells_left = 99
         co_random = self.random_number(99)
         while True:
-            self.i_random_number = co_random.__next__()
+            self.i_random_number = next(co_random)
             print("\n")
             print(f'Новый бочонок: {self.i_random_number} (осталось {self.i_number_barells_left}) ')
 
             for x in self.l_players:
-                print(f'Бочонок: {self.i_random_number} ')
-                self.print_player(x)
-                b_is_number_in = x.check_number(self.i_random_number)
-                if x.s_player_name != "компьютер":
-                    s_yes = input("Зачеркнуть цифру? (y/n)")
-                    if s_yes == "y" and not b_is_number_in or s_yes == "n" and b_is_number_in:
-                        print ( f'Игрок {x.s_player_name} проиграл.')
-                        self.l_players.remove(x)
+                if x.state == "Playing":
+                    print(f'Бочонок: {self.i_random_number} ')
+                    self.print_player(x)
+                    b_is_number_in = x.check_number(self.i_random_number)
+                    if x.s_player_name != "компьютер":
+                        s_yes = input("Зачеркнуть цифру? (y/n)")
+                        if s_yes == "y" and not b_is_number_in or s_yes == "n" and b_is_number_in:
+                            print ( f'Игрок {x.s_player_name} проиграл.')
+                            x.state = "Lost"
             if self.i_number_barells_left < 0:
                 break
             else:
                 self.i_number_barells_left -= 1
 
-            if self.check_win():
+            if self.check_win() or len(self.check_in_play()) == 1:
                 print("Игра завершена!!!!")
-                for player_name in self.check_win():
-                    print(f'Победил {player_name}')
+                for player_name in self.check_in_play():
+                    print(f'Победил {player_name.name}')
                 break
 
     def check_win(self):
-        l_winers = []
-        for x in self.l_players:
-            if x.all_played():
-                l_winers.append(x.s_player_name)
-        return l_winers
+        return [x for x in self.l_players if x.all_played()]
+
+    def check_in_play(self):
+        return [x for x in self.l_players if x.state == "Playing"]
 
     def print_player(self, player):
         l_cards_out = player.get_cards_out()
@@ -90,7 +91,6 @@ class Game():
 
     def random_number(self, max_number):
         l_numbers = []
-        i_random_number = 0
         i_iterator = max_number
         while i_iterator > 0:
             while True:
@@ -101,14 +101,5 @@ class Game():
             yield i_random_number
             i_iterator -= 1
 
-
-if __name__ == "__main__":
-    c_g = Game()
-    c_g.start_game(3,2,["Andrey","Pavel"])
-
-# TODO Для игрока компьютер не надо сравнивать и спрашивать Зачеркнуть. Просто вывести результат
 # TODO Оформить код комментариями
-# TODO Выводить номер бочонка для каждого игрока, за исключением компьютер
-# TODO Вставить пробелы между числами в карточке
-# TODO Если остался один компьютер, то объявить его победителем
-# TODO Посмотреть чтобы цикл прошел все 99 номеров
+
