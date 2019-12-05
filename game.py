@@ -100,6 +100,3 @@ class Game():
                     break
             yield i_random_number
             i_iterator -= 1
-
-# TODO Оформить код комментариями
-

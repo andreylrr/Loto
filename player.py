@@ -1,16 +1,33 @@
 
+"""
+
+    Класс Player представляет игрока в лото включая все карточки, принадлежащие игроку
+
+"""
+
 class Player():
     def __init__(self, name):
+        """
+            Метод инициализации класса
+        :param name: имя игрока
+        """
         self.l_card = []
         self.s_player_name = name
         self.s_state = "Playing"
 
     @property
     def state(self):
+        """
+            Проперти представляющее состояние игрока. Может иметь два значения:
+            "Playing" игрок находится в игре
+            "Lost" игрок проиграл
+        :return: состояние игрока
+        """
         return self.s_state
 
     @state.setter
     def state(self, value):
+        
         self.s_state = value
 
     @property
