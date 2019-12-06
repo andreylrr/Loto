@@ -14,6 +14,7 @@ class Player():
         self._l_card = []
         self._s_player_name = name
         self._s_state = "Play"
+        self._s_type = "1"
 
     @property
     def state(self):
@@ -49,6 +50,24 @@ class Player():
         :param value: новое значение имени игрока
         """
         self._s_player_name = value
+
+    @property
+    def type(self):
+        """
+            Проперти представляющее состояние игрока. Может иметь два значения:
+            "Computer" компьютер
+            "Human" человек
+        :return: тип игрока
+        """
+        return self._s_type
+
+    @type.setter
+    def type(self, value):
+        """
+            Проперти для изменения типа игрока
+        :param value: новое значение типа
+        """
+        self._s_type = value
 
     def add_card(self, card):
         """

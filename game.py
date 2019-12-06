@@ -16,13 +16,15 @@ class Game():
         # Устанавливаем максимальное количество бочонков
         self._i_number_barells_left = 99
 
-    def add_player(self, name):
+    def add_player(self, name, player_type):
         """
             Метод, который добавляет игрока к игре с именем указанным в качестве входного параметра
         :param name: имя игрока
+               player_type: тип игрока
         """
         c_player = pl.Player(name)
         c_player.clean_card()
+        c_player.type = player_type
         for i in range(self._i_card_number):
             c_card = cd.Card()
             c_card.set_card()
@@ -30,7 +32,7 @@ class Game():
         self._l_players.append(c_player)
 
 
-    def start_game(self, play_number, card_number, names ):
+    def start_game(self, play_number, card_number, names, player_types ):
         """
              Метод, который начинает игру. Для указанного количества игроков, карт у каждого игрока и их имена
         :param play_number: количество игроков, должен быть учтен игрок "компьютер"
@@ -55,11 +57,8 @@ class Game():
             raise ValueError("Количество карт у игроков не может быть больше 5.")
 
         # К игре добавляется указанное число игроков минус один с их именами
-        for i in range(self._i_play_number - 1):
-            self.add_player(self._l_players_names[i - 1])
-
-        # Добавляется обязательный игрок "компьютер"
-        self.add_player("компьютер")
+        for i in range(self._i_play_number):
+            self.add_player(self._l_players_names[i], player_types[i])
 
         # Создаем генератор уникальных случайных чисел от 1 до 99
         co_random = self.random_number(99)
@@ -76,7 +75,7 @@ class Game():
                     print(f'Бочонок: {self._i_random_number} ')
                     self.print_player(x)
                     b_is_number_in = x.check_number(self._i_random_number)
-                    if x.name != "компьютер":
+                    if x.type != "Computer":
                         s_yes = input("Зачеркнуть цифру? (y/n)")
                         if s_yes == "y" and not b_is_number_in or s_yes == "n" and b_is_number_in:
                             print ( f'Игрок {x.name} проиграл.')
