@@ -16,7 +16,7 @@ class Game():
         # Устанавливаем максимальное количество бочонков
         self._i_number_barells_left = 99
 
-    def add_player(self, name, player_type):
+    def add_player(self, name: str, player_type: str):
         """
             Метод, который добавляет игрока к игре с именем указанным в качестве входного параметра
         :param name: имя игрока

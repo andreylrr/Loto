@@ -17,8 +17,8 @@ class Barell ():
                         "Empty" бочонок создан, но не имеет никакого присоединненого номера
 
         """
-        self._i_number = number
-        self._s_state = state
+        self.number = number
+        self.state = state
 
     @property
     def number(self):
@@ -29,12 +29,12 @@ class Barell ():
         return self._i_number
 
     @number.setter
-    def number(self, value):
+    def number(self, value: int):
         """
             Проперти для изменеия номера бочонка
         :param value: новое значение номера бочонка
         """
-        if value <= 0 or value > 99:
+        if value < 0 or value > 99:
             raise ValueError("Неверное значение номера бочонка.")
         else:
             self._i_number = value

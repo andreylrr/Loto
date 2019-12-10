@@ -20,9 +20,9 @@ class Card():
              Метод очистки карты и ее заполнения пустыми бочонками
         :return:
         """
-        self.l_lines = []
+        self._l_lines = []
         for i in range(3):
-            self.l_lines.append(self.clean_line())
+            self._l_lines.append(self.clean_line())
 
     def clean_line(self):
         """
@@ -38,9 +38,9 @@ class Card():
              :return: результат проверки
         """
         b_result = False
-        for x in self.l_lines:
+        for x in self._l_lines:
             for barell in x.values():
-                if barell.number == number:
+                if barell.number == number and barell.state == "Ready":
                     barell.state = "Played"
                     b_result = True
         return b_result
@@ -51,7 +51,7 @@ class Card():
         :return: результат проверки
         """
         b_result = True
-        for x in self.l_lines:
+        for x in self._l_lines:
             for barell in x.values():
                 if barell.state == "Ready":
                     b_result = False
@@ -63,7 +63,7 @@ class Card():
         :return: лист и трех элементов
         """
         l_out = []
-        for d_line in self.l_lines:
+        for d_line in self._l_lines:
             l_out.append(self.line_out(d_line))
         return l_out
 
@@ -87,7 +87,7 @@ class Card():
         """
             Метод, который задает начальное значение карточки
         """
-        self.l_lines = list(map(self.set_line, self.l_lines))
+        self._l_lines = list(map(self.set_line, self._l_lines))
 
     def set_line(self, card_dict):
         """
