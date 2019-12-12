@@ -44,7 +44,7 @@ class Player():
             Проперти для получения имени игрока
         :return: имя игрока
         """
-        return self._s_player_name
+        return self._s_name
 
     @name.setter
     def name(self, value: str):
@@ -52,7 +52,7 @@ class Player():
             Проперти для изменеия имени игрока
         :param value: новое значение имени игрока
         """
-        self._s_player_name = value
+        self._s_name = value
 
     @property
     def type(self):

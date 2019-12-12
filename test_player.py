@@ -3,7 +3,7 @@ import player as pl
 import card as cd
 import random as rd
 
-class MyTestCase(unittest.TestCase):
+class PlayerTestCase(unittest.TestCase):
     def setUp(self):
         self.player = pl.Player("Компьютер")
         rd.seed(2)
@@ -65,7 +65,7 @@ class MyTestCase(unittest.TestCase):
         self.player.add_card(cd.Card())
         self.assertEqual(1, len(self.player._l_card))
         self.player.clean_card()
-        self.assertEqual(False, self.player._l_card)
+        self.assertEqual(True, len(self.player._l_card) == 0)
 
     def test_check_number(self):
         o_card1 = cd.Card()

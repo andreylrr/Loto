@@ -93,15 +93,6 @@ class Game():
                         print(f'Победил {player.name}')
                 break
 
-            # Проверяем кол-во игроков в состоянии "Play". Если есть только один игрок в этом состоянии, то он
-            # является победителем. Выводим сообщение и завершаем игру
-            if len(self.check_in_play()) == 1:
-                print("Игра завершена!!!!")
-                for player in self._l_players:
-                    if player.state == "Play":
-                        print(f'Победил {player.name}')
-                break
-
             # Если победителей на данной итерации нет, уменьшаем кол-во оставшихся бочонков и продолжаем игру
             if self._i_number_barells_left < 0:
                 break
