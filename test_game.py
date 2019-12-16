@@ -52,7 +52,7 @@ class GameTestCase(unittest.TestCase):
             self.game.start_game(2, 10, ["Andrey, Computer"], ["Human", "Computer"])
 
         self.game.start_game(1, 1, ["Fedor"], ["Human"])
-        self.assertEqual(l_print_output[9], "Игрок Fedor проиграл.")
+        self.assertEqual(l_print_output[7], "Игрок Fedor проиграл.")
 
 
     def test_check_win(self):
@@ -98,10 +98,7 @@ class GameTestCase(unittest.TestCase):
 
         self.assertEqual(l_print_output[0], "------ Карточки игрока Comp1 ------")
         self.assertEqual(l_print_output[1], "------------------------------------")
-        self.assertEqual(l_print_output[2], "      4  23      30  31  72         ")
-        self.assertEqual(l_print_output[3], "         24      47  66  72  87     ")
-        self.assertEqual(l_print_output[4], "     21          46  47  58  76     ")
-        self.assertEqual(l_print_output[5], "------------------------------------")
+        self.assertEqual(str(l_print_output[2]),str(o_in))
 
     def test_random_number(self):
         random_number = self.game.random_number(99)
@@ -114,6 +111,32 @@ class GameTestCase(unittest.TestCase):
         l_out.sort()
         self.assertEqual(l_out[0], 1)
         self.assertEqual(l_out[98], 99)
+
+    def test_str(self):
+        self.game._i_card_number = 1
+        self.game.add_player("Comp1", "Computer")
+        self.game.add_player("Andrey", "Human")
+        self.assertEqual(str(self.game), "players: Comp1:Computer Andrey:Human  cards:1")
+
+    def test_ne(self):
+        self.game._i_card_number = 1
+        self.game.add_player("Comp1", "Computer")
+        self.game.add_player("Andrey", "Human")
+        self.game1 = gm.Game()
+        self.game1._i_card_number = 1
+        self.game1.add_player("Comp1", "Computer")
+        self.game1.add_player("Andrey", "Human")
+        self.assertEqual(False, self.game != self.game1)
+
+        self.game1.add_player("Fedor", "Human")
+        self.assertEqual(True, self.game != self.game1)
+
+    def test_len(self):
+        self.assertEqual(99, len(self.game))
+
+        self.game._i_number_barells_left = 55
+        self.assertEqual(55, len(self.game))
+
 
 
 if __name__ == '__main__':

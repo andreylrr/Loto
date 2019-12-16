@@ -68,4 +68,8 @@ class Barell ():
             return f'Бочонок создан, но не имеет никакого номера.'
         return f'Ни номер ни состояние бочонка неопределены.'
 
-    
+    def __ne__(self, other):
+        if self.number != other.number:
+            return True
+        else:
+            return False

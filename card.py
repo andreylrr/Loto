@@ -105,4 +105,18 @@ class Card():
                 card_dict[i_position].state = "Ready"
         return card_dict
 
+    def __str__(self):
+        """
+            Метод для преобразования класса в строку
+                :return: лист и трех элементов
+        """
+        l_out = []
+        for d_line in self._l_lines:
+            l_out.append(self.line_out(d_line))
+        return str("".join([x + "\n" for x in l_out]))
 
+    def __ne__(self, other):
+        if str(self) != str(other):
+            return True
+        else:
+            return False

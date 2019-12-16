@@ -116,3 +116,15 @@ class Player():
         """
         if False not in [False for card in self._l_card if not card.is_all_played()]:
             self.state = "Win"
+
+    def __str__(self):
+        return f'{self.name} {self.state} {self.type} {len(self._l_card)}'
+
+    def __ne__(self, other):
+        if str(self) != str(other):
+            return True
+        else:
+            return False
+
+    def __len__(self):
+        return len(self._l_card)

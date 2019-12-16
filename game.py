@@ -137,9 +137,8 @@ class Game():
             raise ValueError("Список карточек пуст.")
 
         # Вывод строк карточки
-        for card in l_cards_out:
-            for cd in card:
-               print(cd)
+        for card in player._l_card:
+            print(card)
             print(i_len_card*"-")
 
     def random_number(self, max_number):
@@ -159,4 +158,14 @@ class Game():
             yield i_random_number
             i_iterator -= 1
 
+    def __str__(self):
+        return f'players: {"".join([x.name + ":" + x.type + " " for x in self._l_players])} cards:{self._i_card_number}'
 
+    def __ne__(self, other):
+        if str(self) != str(other):
+            return True
+        else:
+            return False
+
+    def __len__(self):
+        return self._i_number_barells_left
