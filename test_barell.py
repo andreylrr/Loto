@@ -59,6 +59,21 @@ class BarellTestCase(unittest.TestCase):
         with self.assertRaises(TypeError):
             self.barell.number = [0,1,100]
 
+    def test_str(self):
+        self.assertEqual(str(self.barell),"Бочонок номер 1 создан и готов к игре.")
+        self.barell.state = "Empty"
+        self.assertEqual(str(self.barell),"Бочонок создан, но не имеет никакого номера.")
+        self.barell.number = 26
+        self.barell.state = "Played"
+        self.assertEqual(str(self.barell),"Бочнок номер 26 уже был вытащен из мешка.")
+
+    def test_ne(self):
+        self.barell.number = 26
+        self.barell1 = b.Barell(30, "Empty")
+        self.assertEqual(True, self.barell != self.barell1)
+        self.barell1.number = 26
+        self.assertEqual(False, self.barell != self.barell1)
+
 
 if __name__ == '__main__':
     unittest.main()

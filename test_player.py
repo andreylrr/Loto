@@ -153,5 +153,36 @@ class PlayerTestCase(unittest.TestCase):
         self.player.all_played()
         self.assertEqual("Win", self.player.state)
 
+    def test_str(self):
+        self.player.name = "Fedor"
+        self.player.type = "Human"
+        self.player.state = "Play"
+        self.player.add_card(cd.Card())
+        self.assertEqual(str(self.player), "Fedor Play Human 1")
+
+    def test_ne(self):
+        self.player.name = "Fedor"
+        self.player.type = "Human"
+        self.player.state = "Play"
+        self.player.add_card(cd.Card())
+        self.player1 = pl.Player("Comp1")
+        self.player1.type = "Computer"
+        self.player1.state = "Play"
+        self.player1.add_card(cd.Card())
+        self.assertEqual(True, self.player != self.player1)
+
+        self.player1.name = "Fedor"
+        self.player1.type = "Human"
+        self.assertEqual(False, self.player != self.player1)
+
+    def test_len(self):
+        self.assertEqual(len(self.player),0)
+        self.player.add_card(cd.Card())
+        self.assertEqual(len(self.player),1)
+        self.player.add_card(cd.Card())
+        self.assertEqual(len(self.player),2)
+        self.player.add_card(cd.Card())
+        self.assertEqual(len(self.player),3)
+
 if __name__ == '__main__':
     unittest.main()

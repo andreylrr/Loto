@@ -107,6 +107,20 @@ class CardTestCase(unittest.TestCase):
         d_out = self.card.line_out(d_card)
         self.assertEqual(d_out, "      8          11      12  22  47 ")
 
+    def test_str(self):
+        self.card.set_card()
+        s_out = "".join([x + "\n" for x in ["      8          11      12  22  47 ",
+                                            "              5  21  56  75      88 ",
+                                            "      4       5  35  47  60         "
+                                            ]])
+        self.assertEqual(str(self.card), s_out)
+
+    def test_ne(self):
+        self.card.set_card()
+        self.card1 = c.Card()
+        self.card1.set_card()
+        self.assertEqual(True, self.card1 != self.card)
+
 
 if __name__ == '__main__':
     unittest.main()
