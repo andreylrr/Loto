@@ -58,3 +58,14 @@ class Barell ():
             self._s_state = value
         else:
             raise ValueError("Неподдерживаемое состояние бочонка.")
+
+    def __str__(self):
+        if self.state == "Ready":
+            return f'Бочонок номер {self.number} создан и готов к игре.'
+        elif self.state == "Played":
+            return f'Бочнок номер {self.number} уже был вытащен из мешка.'
+        elif self.state == "Empty":
+            return f'Бочонок создан, но не имеет никакого номера.'
+        return f'Ни номер ни состояние бочонка неопределены.'
+
+    
