@@ -1,4 +1,4 @@
-
+import card as cd
 """
 
     Класс Player представляет игрока в лото включая все карточки, принадлежащие игроку
@@ -6,15 +6,15 @@
 """
 
 class Player():
-    def __init__(self, name):
+    def __init__(self, name: str):
         """
             Метод инициализации класса
         :param name: имя игрока
         """
         self._l_card = []
-        self._s_player_name = name
+        self._s_name = name
         self._s_state = "Play"
-        self._s_type = "1"
+        self._s_type = "Human"
 
     @property
     def state(self):
@@ -28,12 +28,15 @@ class Player():
         return self._s_state
 
     @state.setter
-    def state(self, value):
+    def state(self, value: str):
         """
             Проперти для изменения состояния игрока
         :param value: новое значение состояния
         """
-        self._s_state = value
+        if value == "Play" or value == "Lost" or value == "Win":
+            self._s_state = value
+        else:
+            raise ValueError("Неподдерживаемое состояние игрока.")
 
     @property
     def name(self):
@@ -41,15 +44,15 @@ class Player():
             Проперти для получения имени игрока
         :return: имя игрока
         """
-        return self._s_player_name
+        return self._s_name
 
     @name.setter
-    def name(self, value):
+    def name(self, value: str):
         """
             Проперти для изменеия имени игрока
         :param value: новое значение имени игрока
         """
-        self._s_player_name = value
+        self._s_name = value
 
     @property
     def type(self):
@@ -67,9 +70,12 @@ class Player():
             Проперти для изменения типа игрока
         :param value: новое значение типа
         """
-        self._s_type = value
+        if value == "Computer" or value == "Human":
+            self._s_type = value
+        else:
+            raise ValueError("Неподдерживаемый тип игрока.")
 
-    def add_card(self, card):
+    def add_card(self, card: cd.Card):
         """
             Метод для добавления новой карточки игроку
         :param card: новая карточка
@@ -82,7 +88,7 @@ class Player():
         """
         self._l_card = []
 
-    def check_number(self, number):
+    def check_number(self, number: int):
         """
             Метод, который проверяет наличие номера бочонка указанного
             во входном параметре во всех карточках игрока

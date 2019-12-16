@@ -16,7 +16,7 @@ class Game():
         # Устанавливаем максимальное количество бочонков
         self._i_number_barells_left = 99
 
-    def add_player(self, name, player_type):
+    def add_player(self, name: str, player_type: str):
         """
             Метод, который добавляет игрока к игре с именем указанным в качестве входного параметра
         :param name: имя игрока
@@ -78,7 +78,7 @@ class Game():
                     if x.type != "Computer":
                         s_yes = input("Зачеркнуть цифру? (y/n)")
                         if s_yes == "y" and not b_is_number_in or s_yes == "n" and b_is_number_in:
-                            print ( f'Игрок {x.name} проиграл.')
+                            print(f'Игрок {x.name} проиграл.')
                             x.state = "Lost"
                 # Проверяем все ли номера на карте игрока закрыты
                 # Если да, то помечаем игрока как победителя
@@ -93,13 +93,7 @@ class Game():
                         print(f'Победил {player.name}')
                 break
 
-            # Проверяем кол-во игроков в состоянии "Play". Если есть только один игрок в этом состоянии, то он
-            # является победителем. Выводим сообщение и завершаем игру
-            if len(self.check_in_play()) == 1:
-                print("Игра завершена!!!!")
-                for player in self._l_players:
-                    if player.state == "Play":
-                        print(f'Победил {player.name}')
+            if not self.check_in_play():
                 break
 
             # Если победителей на данной итерации нет, уменьшаем кол-во оставшихся бочонков и продолжаем игру
@@ -144,7 +138,8 @@ class Game():
 
         # Вывод строк карточки
         for card in l_cards_out:
-            print(card[0]+"\n"+card[1]+"\n"+card[2])
+            for cd in card:
+               print(cd)
             print(i_len_card*"-")
 
     def random_number(self, max_number):

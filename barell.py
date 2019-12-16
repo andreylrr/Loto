@@ -17,8 +17,8 @@ class Barell ():
                         "Empty" бочонок создан, но не имеет никакого присоединненого номера
 
         """
-        self.i_number = number
-        self.s_state = state
+        self.number = number
+        self.state = state
 
     @property
     def number(self):
@@ -26,15 +26,18 @@ class Barell ():
             Проперти для получения номера, ассоциированного с данным бочонком
         :return: номер бочонка
         """
-        return self.i_number
+        return self._i_number
 
     @number.setter
-    def number(self, value):
+    def number(self, value: int):
         """
             Проперти для изменеия номера бочонка
         :param value: новое значение номера бочонка
         """
-        self.i_number = value
+        if value < 0 or value > 99:
+            raise ValueError("Неверное значение номера бочонка.")
+        else:
+            self._i_number = value
 
     @property
     def state(self):
@@ -42,7 +45,7 @@ class Barell ():
             Проперти для получения состояния бочонка
         :return: состояние бочонка
         """
-        return self.s_state
+        return self._s_state
 
     @state.setter
     def state(self, value):
@@ -51,4 +54,7 @@ class Barell ():
 
         :param value: новое значение состояния бочонка
         """
-        self.s_state = value
+        if value == "Played" or value == "Ready" or value == "Empty":
+            self._s_state = value
+        else:
+            raise ValueError("Неподдерживаемое состояние бочонка.")

@@ -1,4 +1,6 @@
+import unittest
 import game as gm
+import random as rd
 
 """
     Программа реализует игру Лото
